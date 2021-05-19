@@ -1,7 +1,8 @@
+import operator
 
-relations = [(3,12),(2,6),(5,7),(5,12),(2,8),(1,2),(1,9),(1,10),(4,11),(4,10),(10,12)]
-vertices = [1,2,3,4,5,6,7,8,9,10,11,12]
-
+relations = [(1,10),(1,6),(1,2),(2,8),(2,3),(3,4),(4,5),(4,7),(6,7),(6,9),(7,8),(8,9),(5,10)]
+vertices = [1,2,3,4,5,6,7,8,9,10]
+# saugomi kiekvienos virsunes atributai
 class vertex:
     def __init__(self, value, color, start_time, end_time, parent):
         self.value = value
@@ -10,17 +11,19 @@ class vertex:
         self.end_time = end_time
         self.parent = parent
 
-graph = []
+graph = [] # virsuniu klases list'as
 for i in range(len(vertices)):
     graph.append(vertex(vertices[i], 'balta', 0, 0, None))
+
 laikas = 0
-depth = [] # apdorojimo eiles tvarka rastos virsunes
+depth = [] # virsunes, surasytos depth first radimo tvarka
 
 def visit(u, laikas):
     u.color = 'pilka'
     laikas += 1
     u.start_time = laikas
     v = findRelatedVertices(relations, u.value)
+    v = sorted(v, key=operator.attrgetter('value'))
     for j in range(len(v)):
         if v[j].color == 'balta':
             v[j].parent = u.value
@@ -31,6 +34,7 @@ def visit(u, laikas):
     u.end_time = laikas
     return laikas, u
 
+# ieskoma taku siejanciu su kitomis virsunemis ir grazinamos virsunes i kurias galima nueiti is virsunes x
 def findRelatedVertices(rel, x):
     ver = []
     tarp = 0
@@ -44,14 +48,11 @@ def findRelatedVertices(rel, x):
                 ver.append(graph[j])
     return ver
 
-
-
 for i in range(len(vertices)):
     if graph[i].color == 'balta':
         laikas, graph[i] = visit(graph[i], laikas)
 
-print(depth)
+print("Eiles tvarka rastos virsunes - ",depth)
 
-#for i in range(len(vertices)):
-    # print(depth[i])
-    # print(graph[i].value, graph[i].parent, graph[i].end_time-graph[i].start_time, graph[i].color)
+for i in range(len(vertices)):
+    print("Virsune",graph[i].value,"buvo apdorota per",graph[i].end_time-graph[i].start_time,"zingsniu")
