@@ -52,7 +52,7 @@ for i in range(len(vertices)):
     if graph[i].color == 'balta':
         laikas, graph[i] = visit(graph[i], laikas)
 
-print("Eiles tvarka rastos virsunes - ",depth)
+print("Depth-first tvarka rastos virsunes - ",depth)
 
-for i in range(len(vertices)):
-    print("Virsune",graph[i].value,"buvo apdorota per",graph[i].end_time-graph[i].start_time,"zingsniu")
+# for i in range(len(vertices)):
+#     print("Virsune",graph[i].value,"buvo apdorota per",graph[i].end_time-graph[i].start_time,"zingsniu")

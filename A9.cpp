@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// funkcija pavercianti raides i didziasias
+// mazosios raides verciamos i didziasias
 void toUpper(string &num){
     for (int i=0; i<num.length(); ++i){
         if (!isupper(num[i]))
@@ -49,13 +49,14 @@ double nBaseToDecimal (string num, string el, int m){
         for (int j=0; j<36; j++){
             if (v[i] == el[j]){
                 fnum += (j)*pow(m, a);
-                // cout << j << " * " << m << "^(" << a << ")" << " = " << (j)*pow(m, a) << "fnum: " << fnum << endl;
+                //cout << j << " * " << m << "^(" << a << ")" << " = " << (j)*pow(m, a) << " fnum: " << fixed << setprecision(8) << fnum << endl;
                 --a;
                 break;
             }
         }
     }
     if (v[0] == '-') fnum*=(-1);
+    cout << fnum << endl;
     return fnum;
 }
 // funkcija konvertuojanti desimtaine sk. sist. i n-taine
@@ -102,7 +103,7 @@ string decimal_to_nBase(double num, int n, string el){
 void Calculate(){
     string el = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string num, result;  // string tipo num ir res
-    int m, n;            // m - from, n - to
+    int m, n;            // m - from base, n - to base
     double res, nmb;     // double tipo num ir res
     Input(n, m, num);
     if (m == 10){
