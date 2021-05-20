@@ -5,8 +5,10 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
+#include <limits>
 
 using namespace std;
+typedef numeric_limits<double> dbl;
 
 // mazosios raides verciamos i didziasias
 void toUpper(string &num){
@@ -31,6 +33,7 @@ void Input(int &n, int &m, string &num){
 // funkcija isvedanti konvertuota skaiciu
 template <typename T1, typename T2>
 void Output(T1 num, T2 res){
+    cout.precision(dbl::max_digits10);
     cout << setw(17) << left << "Entered number: " << num << endl;
     cout << setw(17) << left << "Result number: " << res << endl;
 }
@@ -56,7 +59,7 @@ double nBaseToDecimal (string num, string el, int m){
         }
     }
     if (v[0] == '-') fnum*=(-1);
-    cout << fnum << endl;
+    //cout << fnum << endl;
     return fnum;
 }
 // funkcija konvertuojanti desimtaine sk. sist. i n-taine
