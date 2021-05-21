@@ -39,7 +39,7 @@ void Output(T1 num, T2 res){
 }
 // funkcija konvertuojanti n-taine sk. sist. i desimtaine
 double nBaseToDecimal (string num, string el, int m){
-    int a=-1;
+    int a=-1; // laipsnis, kuriuo bus keliamas m
     int b=0;
     double fnum=0;
     vector<char> v(num.begin(), num.end());
@@ -52,24 +52,23 @@ double nBaseToDecimal (string num, string el, int m){
         for (int j=0; j<36; j++){
             if (v[i] == el[j]){
                 fnum += (j)*pow(m, a);
-                //cout << j << " * " << m << "^(" << a << ")" << " = " << (j)*pow(m, a) << " fnum: " << fixed << setprecision(8) << fnum << endl;
                 --a;
                 break;
             }
         }
     }
     if (v[0] == '-') fnum*=(-1);
-    //cout << fnum << endl;
     return fnum;
 }
 // funkcija konvertuojanti desimtaine sk. sist. i n-taine
+// num - desimtainis sk, n - base i kuria convertuojama, el - visi galimi simboliai
 string decimal_to_nBase(double num, int n, string el){
     double r;
     int a, z=0;
     vector<int> liek;       // liekana
     long long rnum;         // sveikoji skaiciaus dalis
     bool isPositive = true; // ar skaicius teigiamas
-    string fnum;
+    string fnum;            // n-taines sistemos sk
     if (num < 0){
         isPositive = false;
         num = abs(num);
@@ -83,20 +82,19 @@ string decimal_to_nBase(double num, int n, string el){
     if (!isPositive)
         fnum = "-";
     if (z>0){
-        fnum += el[liek[z-1]];
-        for (int j=z-2; j>=0; j--)
+        for (int j=z-1; j>=0; j--)
             fnum += el[liek[j]];
     }
-    num -= floor(num);
+    num -= floor(num);  // atimama sveikoji skaiciaus dalis
     if (num != 0){
         if (z>0) fnum += ".";
         else fnum = "0.";
-        for (int i=0; i<10; i++){
+        for (int i=0; i<10; i++){  // 10 sk po kableliu tikslumas
             r = num*n;
             a = floor(r);
             r -= a;
             num = r;
-            if (num-a == 0) break;
+            if (num-a == 0) break; // jei sk po kablelio maziau, ciklas baigiasi
             fnum += el[a];
         }
     }

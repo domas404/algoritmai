@@ -23,7 +23,7 @@ def visit(u, laikas):
     laikas += 1
     u.start_time = laikas
     v = findRelatedVertices(relations, u.value)
-    v = sorted(v, key=operator.attrgetter('value'))
+    v = sorted(v, key=operator.attrgetter('value')) # rasti elementai, surikiuojami pagal reiksmes didejimo tvarka
     for j in range(len(v)):
         if v[j].color == 'balta':
             v[j].parent = u.value

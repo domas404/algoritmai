@@ -68,10 +68,10 @@ void palindromicPrimes(int a, int b, vector<int> &primes){
 void findPrimes(int b, vector<int> &primes){
     for (int i=0; i<=b; i++){
         if(i == 1) continue;
-        if(i!=2 && i%2 == 0) continue;
-        if(i!=3 && isDivisibleBy3(i)) continue;
-        if(i!=5 && i%5 == 0) continue;
-        if(isDivisibleAtAll(i, primes)) continue;
+        else if(i!=2 && i%2 == 0) continue;
+        else if(i!=3 && isDivisibleBy3(i)) continue;
+        else if(i!=5 && i%5 == 0) continue;
+        else if(isDivisibleAtAll(i, primes)) continue;
         primes.push_back(i);
     }
 }
